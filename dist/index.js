@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const commander_1 = require("commander");
@@ -29,7 +28,9 @@ program
     .description("Check current authenticated user")
     .action(whoami_1.whoamiCommand);
 // Profiles Commands
-const profiles = program.command("profiles").description("Manage and query profiles");
+const profiles = program
+    .command("profiles")
+    .description("Manage and query profiles");
 profiles
     .command("list")
     .description("List profiles with optional filters")

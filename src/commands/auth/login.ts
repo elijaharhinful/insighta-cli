@@ -56,6 +56,14 @@ export async function loginCommand() {
   return new Promise<void>((resolve, reject) => {
     const server = http.createServer(async (req, res) => {
       const url = new URL(req.url!, `http://localhost:${CALLBACK_PORT}`);
+      
+      // Ignore favicon or any other stray requests
+      if (url.pathname !== "/callback") {
+        res.writeHead(404);
+        res.end();
+        return;
+      }
+
       const receivedCode = url.searchParams.get("code");
       const receivedState = url.searchParams.get("state");
 
