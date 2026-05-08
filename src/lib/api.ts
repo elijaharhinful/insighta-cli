@@ -41,9 +41,15 @@ export function getClient(): AxiosInstance {
           const { data } = await axios.post<{
             access_token: string;
             refresh_token: string;
-          }>(`${BASE_URL}/auth/refresh`, {
-            refresh_token: creds.refresh_token,
-          });
+          }>(
+            `${BASE_URL}/auth/refresh`,
+            { refresh_token: creds.refresh_token },
+            {
+              headers: {
+                Authorization: `Bearer ${creds.access_token}`,
+              },
+            }
+          );
 
           saveCredentials({
             ...creds,
